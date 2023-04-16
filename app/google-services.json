@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "378049365316",
+    "project_id": "reportit-decea",
+    "storage_bucket": "reportit-decea.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:378049365316:android:69a5593acbd68de575c311",
+        "android_client_info": {
+          "package_name": "com.example.report_it"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "378049365316-kv3ea0mlnos2jreu8svf0eu3ve67mcbr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.report_it",
+            "certificate_hash": "547e481517de03ee25581ba6c6818a41432591eb"
+          }
+        },
+        {
+          "client_id": "378049365316-q5oaanvod6l3ldjhlgnqsncs9o8usu53.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArwr0IYhtBQIOUloErOfzNOgh-533dX84"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "378049365316-q5oaanvod6l3ldjhlgnqsncs9o8usu53.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

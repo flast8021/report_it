@@ -1,0 +1,25 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_exit"
+        android:icon="@drawable/ic_exit"
+        android:title="Log Out"/>
+    <item
+        android:id="@+id/navigation_profile"
+        android:icon="@drawable/ic_profile"
+        android:title="@string/profile" />
+
+    <item
+        android:id="@+id/navigation_donation"
+        android:icon="@drawable/ic_donation"
+        android:title="Donations" />
+    <item
+        android:id="@+id/navigation_help"
+        android:icon="@drawable/ic_help"
+        android:title="@string/call_112" />
+    <item
+        android:id="@+id/navigation_info"
+        android:icon="@drawable/ic_info"
+        android:title="About App" />
+
+</menu>
