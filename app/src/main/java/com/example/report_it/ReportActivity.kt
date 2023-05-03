@@ -28,6 +28,7 @@ import com.google.android.gms.maps.model.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_report.*
+import com.google.android.gms.maps.model.CircleOptions
 
 class ReportActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -45,6 +46,8 @@ class ReportActivity : AppCompatActivity(), OnMapReadyCallback {
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
+
+
         firebaseAuth = FirebaseAuth.getInstance()
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -60,27 +63,32 @@ class ReportActivity : AppCompatActivity(), OnMapReadyCallback {
                 R.id.navigation_exit -> {
                     val intent = Intent(this, LoginActivity::class.java)
                     startActivity(intent)
-                    true
+                    onBackPressed()
+                    false
                 }
                 R.id.navigation_profile -> {
                     val intent = Intent(this, ProfileActivity::class.java)
                     startActivity(intent)
-                    true
+                    onBackPressed()
+                    false
                 }
                 R.id.navigation_donation -> {
                     val intent = Intent(this, DonationActivity::class.java)
                     startActivity(intent)
-                    true
+                    onBackPressed()
+                    false
                 }
                 R.id.navigation_help -> {
                     val phoneNum = "tel:112"
                     val dialIntent = Intent(Intent.ACTION_DIAL, Uri.parse(phoneNum))
                     startActivity(dialIntent)
-                    true
+                    onBackPressed()
+                    false
                 }R.id.navigation_info -> {
                 val intent = Intent(this, AppInfoActivity::class.java)
                 startActivity(intent)
-                true
+                onBackPressed()
+                false
                 }
                 else -> false
             }
@@ -160,6 +168,7 @@ class ReportActivity : AppCompatActivity(), OnMapReadyCallback {
         } else {
             fusedLocationClient.lastLocation.addOnSuccessListener { location ->
                 if (location != null) {
+
                     val latLng = LatLng(location.latitude, location.longitude)
 
                     val userDocRef = FirebaseFirestore.getInstance().collection("users").document(firebaseAuth.currentUser!!.uid)
@@ -203,6 +212,11 @@ class ReportActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         this.googleMap = googleMap
 
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            googleMap.isMyLocationEnabled = true
+        } else {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), REQUEST_LOCATION_PERMISSION)
+        }
         // Check if location permission is granted
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
             != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
@@ -230,12 +244,12 @@ class ReportActivity : AppCompatActivity(), OnMapReadyCallback {
                     val latLng = LatLng(it.latitude, it.longitude)
                     var isMarkerDropped = false
 
-
                     Location.distanceBetween(location.latitude,location.longitude,latLng.latitude,latLng.longitude,results)
 
                     val distanceInMeters = results[0]
 
                     if (distanceInMeters > 1000){
+
                         Toast.makeText(this, "Marker is too far from current location", Toast.LENGTH_SHORT).show()
                         return@addOnSuccessListener
                     }
@@ -248,7 +262,7 @@ class ReportActivity : AppCompatActivity(), OnMapReadyCallback {
                                 googleMap.addMarker(markerOptions)
                                 val userDocRefrence = FirebaseFirestore.getInstance().collection("users").document(firebaseAuth.currentUser!!.uid)
                                 saveButton.setOnClickListener{
-                                    Toast.makeText(this@ReportActivity, "Successfully Saved!", Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(this@ReportActivity, "Location Successfully Saved!", Toast.LENGTH_SHORT).show()
                                         if(distanceInMeters<=1000){
                                             userDocRefrence.update("Incident Location", latLng)
                                                 .addOnSuccessListener {
@@ -313,5 +327,11 @@ class ReportActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onLowMemory() {
         super.onLowMemory()
         mapView.onLowMemory()
+    }
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 }

@@ -12,12 +12,12 @@
     <string name="profile">Profile</string>
     <string name="info">About Application</string>
     <string name="out">Sign Out</string>
-    <string name="aboutApplication1">This is a very simple, Incident Reporting Application. It gives power to every citizen to play their role in Society.</string>
-    <string name="aboutApplication2">By longclicking anywhere within 1km of your range you\'d be able to drop a Marker on Maps.</string>
-    <string name="aboutApplication3">If mistakenly marked at wrong location, you can always long click marker to adjust location.</string>
-    <string name="aboutApplication4">After your\'e completly satisfied with location you can proceede with few question about incident.</string>
-    <string name="aboutApplication0">Note: Only locations allowed are within 1km of radius.</string>
-    <string name="aboutApplication5">For making country safe and proud.</string>
+    <string name="aboutApplication1">This application requires Location permissions &amp; Camera permissions to work.</string>
+    <string name="aboutApplication2">Incident can be reported by long clicking anywhere within 1km of your radius you\'d be able to drop a Marker on Maps.</string>
+    <string name="aboutApplication3">If mistakenly marked at wrong location, you can always long click on marker to correct incident location.</string>
+    <string name="aboutApplication4">After your\'e completely satisfied with location you can proceed with few question about incident.</string>
+    <string name="aboutApplication0">Note: All the information should be legit otherwise legal investigation will be conducted.</string>
+    <string name="aboutApplication5">For making yourself safe and proud.</string>
 
     <string name="terms_conditions">I Agree to <u>Terms
         &amp; Condition</u></string>
@@ -32,8 +32,11 @@
     <string name="q4">Are you doing this for someone you know?</string>
     <string name="q5">Please write as much information as you can:</string>
     <string name="q6">Please confirm that all information provided is true and is best of your knowledge.</string>
-    <string name="q7">Please confirm if we need to contact you for verification and information purposes.</string>
+    <string name="q7">Please confirm if you want to be contacted for verification and information purposes.</string>
     <string name="attatchment">Please select proof of incident.</string>
+
+    <string name="location">To report incidents, allow Reportit access to your location. Tap Settings > Permissions, and turn location On.</string>
+
 
     <string-array name="q1_options">
         <item>Theft</item>
@@ -56,5 +59,7 @@
         <item>Female</item>
         <item>Prefer Not To Say</item>
     </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

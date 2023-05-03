@@ -1,15 +1,21 @@
 package com.example.report_it
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import java.util.*
 import kotlin.collections.ArrayList
 import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
+import androidx.core.app.ActivityCompat
+import com.example.report_it.ReportActivity.Companion.REQUEST_LOCATION_PERMISSION
+import com.google.android.gms.location.LocationServices
 import com.google.firebase.auth.FirebaseAuth
 
 
@@ -35,6 +41,10 @@ class MainActivity : AppCompatActivity() {
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), REQUEST_LOCATION_PERMISSION)
+        }
+
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_exit)
@@ -118,15 +128,18 @@ class MainActivity : AppCompatActivity() {
                 "Report an Incident" -> {
                     val intent = Intent(this, ReportActivity::class.java)
                     startActivity(intent)
+                    finish()
                 }
                 "About Donation" -> {
                     val intent = Intent(this, DonationActivity::class.java)
                     startActivity(intent)
+                    finish()
                 }
                 "Call 112" -> {
                     val phoneNum = "tel:112"
                     val dialIntent = Intent(Intent.ACTION_DIAL, Uri.parse(phoneNum))
                     startActivity(dialIntent)
+                    finish()
                 }
                 "Profile" -> {
                     val intent = Intent(this, ProfileActivity::class.java)
@@ -136,17 +149,19 @@ class MainActivity : AppCompatActivity() {
                 "About Application" -> {
                     val intent = Intent(this, AppInfoActivity::class.java)
                     startActivity(intent)
+                    finish()
                 }
                 "Sign Out" -> {
-                auth.signOut()
-                val intent = Intent(this, LoginActivity::class.java)
-                startActivity(intent)
-                finish()
+                    Toast.makeText(this, "Signed out Sucessfully" ,Toast.LENGTH_SHORT).show()
+                    auth.signOut()
+                    finish()
                 }
             }
         }
 
     }
+
+
     private fun getData(){
         for (i in imageList.indices){
             val dataClass = DataClass(imageList[i],titleList[i])

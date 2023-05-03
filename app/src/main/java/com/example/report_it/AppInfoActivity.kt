@@ -16,23 +16,23 @@ class AppInfoActivity : AppCompatActivity() {
                 R.id.navigation_exit -> {
                     val intent = Intent(this, LoginActivity::class.java)
                     startActivity(intent)
-                    true
+                    false
                 }
                 R.id.navigation_profile -> {
                     val intent = Intent(this, ProfileActivity::class.java)
                     startActivity(intent)
-                    true
+                    false
                 }
                 R.id.navigation_donation -> {
                     val intent = Intent(this, DonationActivity::class.java)
                     startActivity(intent)
-                    true
+                    false
                 }
                 R.id.navigation_help -> {
                     val phoneNum = "tel:112"
                     val dialIntent = Intent(Intent.ACTION_DIAL, Uri.parse(phoneNum))
                     startActivity(dialIntent)
-                    true
+                    false
                 }R.id.navigation_info -> {
                 true
             }

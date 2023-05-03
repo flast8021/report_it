@@ -73,13 +73,14 @@ class RegisterActivity : AppCompatActivity() {
                 firebaseAuth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener{
                     if(it.isSuccessful)
                     {
-                        val userProfile = UserProfile(name, email, pass, phone, spinner.selectedItem.toString())
+                        val userProfile = UserProfile(name, email, pass, phone, gender)
 
                         // Add user's registration data to Firestore
                         firestore.collection("users").document(FirebaseAuth.getInstance().currentUser!!.uid).set(userProfile)
                             .addOnSuccessListener {
                                 Toast.makeText(this, "Registered Successfully! ", Toast.LENGTH_SHORT).show()
                                 val intent = Intent(this, LoginActivity::class.java)
+                                firebaseAuth.signOut()
                                 startActivity(intent)
                                 finish()
                             }

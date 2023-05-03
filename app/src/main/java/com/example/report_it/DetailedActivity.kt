@@ -35,25 +35,22 @@ class DetailedActivity : AppCompatActivity() {
         firestore = Firebase.firestore
         auth = FirebaseAuth.getInstance()
 
-            button_submit.setOnClickListener {
+        button_next.setOnClickListener {
                 val answer1 = q1_textBox.text.toString()
                 val answer2 = q2_textBox.text.toString()
                 val answer3 = q3_textBox.text.toString()
                 val answer4 = q4_textBox.text.toString()
                 val answer5 = q5_textBox.text.toString()
 
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-                finish()
-                if (checkbox_correct_details.isChecked && checkbox_correct_details2.isChecked && answer1.isNotEmpty() && answer2.isNotEmpty() && answer3.isNotEmpty() && answer4.isNotEmpty() && answer5.isNotEmpty()) {
+                if (checkbox_correct_details.isChecked && answer1.isNotEmpty() && answer2.isNotEmpty() && answer3.isNotEmpty() && answer4.isNotEmpty() && answer5.isNotEmpty()) {
                     val userAns = AnswerClass(answer1, answer2, answer3, answer4, answer5)
                     firestore.collection("Answers")
                         .document(FirebaseAuth.getInstance().currentUser!!.uid).set(userAns)
                         .addOnSuccessListener {
-                            Toast.makeText(this, "Submitted Successfully! ", Toast.LENGTH_SHORT)
+                            Toast.makeText(this, "Please Attach Proofs of Incident!", Toast.LENGTH_SHORT)
                                 .show()
 
-                            val intent = Intent(this, MainActivity::class.java)
+                            val intent = Intent(this, ProofActivity::class.java)
                             startActivity(intent)
                             finish()
                         }.addOnFailureListener { exception ->
@@ -62,7 +59,6 @@ class DetailedActivity : AppCompatActivity() {
                 } else {
                     Toast.makeText(this, "OOPS! Some fields are missing.", Toast.LENGTH_SHORT)
                         .show()
-
                 }
             }
             bottom_navigation2.setOnNavigationItemSelectedListener { menuItem ->
@@ -89,6 +85,7 @@ class DetailedActivity : AppCompatActivity() {
                         val phoneNum = "tel:112"
                         val dialIntent = Intent(Intent.ACTION_DIAL, Uri.parse(phoneNum))
                         startActivity(dialIntent)
+                        finish()
                         true
                     }
                     R.id.navigation_info -> {
@@ -100,5 +97,11 @@ class DetailedActivity : AppCompatActivity() {
                     else -> false
                 }
             }
+    }
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val intent = Intent(this, ReportActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 }

@@ -33,13 +33,13 @@ class DonationActivity : AppCompatActivity() {
                     val intent = Intent(this, LoginActivity::class.java)
                     startActivity(intent)
                     finish()
-                    true
+                    false
                 }
                 R.id.navigation_profile -> {
                     val intent = Intent(this, ProfileActivity::class.java)
                     startActivity(intent)
                     finish()
-                    true
+                    false
                 }
                 R.id.navigation_donation -> {
                     true
@@ -48,15 +48,21 @@ class DonationActivity : AppCompatActivity() {
                     val phoneNum = "tel:112"
                     val dialIntent = Intent(Intent.ACTION_DIAL, Uri.parse(phoneNum))
                     startActivity(dialIntent)
-                    true
+                    false
                 }R.id.navigation_info -> {
                 val intent = Intent(this, AppInfoActivity::class.java)
                 startActivity(intent)
                 finish()
-                true
+                false
             }
                 else -> false
             }
         }
+    }
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val intent = Intent(this, ReportActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 }

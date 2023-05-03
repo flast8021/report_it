@@ -1,10 +1,10 @@
 package com.example.report_it
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -22,7 +22,7 @@ class ProfileActivity : AppCompatActivity() {
         setContentView(R.layout.activity_profile)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        val toolbar = findViewById<Toolbar>(R.id.toolbarProfile)
         setSupportActionBar(toolbar)
 
 
@@ -31,7 +31,6 @@ class ProfileActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-
 
         firebaseAuth = FirebaseAuth.getInstance()
 
@@ -67,4 +66,10 @@ class ProfileActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.profile_name).text = name
         findViewById<TextView>(R.id.profile_gender).text = gender
         findViewById<TextView>(R.id.profile_phone).text = phone   }
+
+    override fun onBackPressed() {
+        this.startActivity(Intent(this, MainActivity::class.java))
+        finish()
+        return
+    }
 }
